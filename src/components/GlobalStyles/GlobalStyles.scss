@@ -5,6 +5,9 @@
   //Default Layout
   --default-layout-header-height: 60px;
   --default-layout-width: 1150px;
+  --primary-color: rgba(254, 44, 85, 1);
+  --black: #000;
+  --text-color: #333;
 }
 
 * {
@@ -22,4 +25,16 @@ body {
   font-size: 1.6rem;
   line-height: 1.5;
   text-rendering: optimizeSpeed;
+}
+
+button,
+input,
+[tabindex] {
+  border: none;
+  outline: none;
+}
+
+a[herf] {
+  color: var(--text-color);
+  text-decoration: none;
 }
