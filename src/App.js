@@ -6,7 +6,7 @@ import './App.css';
 
 function App() {
   return (
-    <Router>
+    <Router> 
       <div className="App">
         <Routes>
           {publicRoutes.map((route, index) => {

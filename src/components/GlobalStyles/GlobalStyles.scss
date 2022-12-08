@@ -7,7 +7,9 @@
   --default-layout-width: 1150px;
   --primary-color: rgba(254, 44, 85, 1);
   --black: #000;
+  --white: #fff;
   --text-color: #333;
+  --default-layout-horizontal-spacer: 24px;
 }
 
 * {
@@ -24,7 +26,6 @@ body {
   font-family: 'IBM Plex Sans', sans-serif;
   font-size: 1.6rem;
   line-height: 1.5;
-  text-rendering: optimizeSpeed;
 }
 
 button,
@@ -34,7 +35,24 @@ input,
   outline: none;
 }
 
-a[herf] {
-  color: var(--text-color);
+a[href] {
   text-decoration: none;
+  line-height: 1.15;
+}
+
+// Custom Tippy
+body {
+  .tippy-box {
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1.6rem;
+    line-height: 2.2rem;
+    background-color: rgba(84, 84, 84, 0.92);
+  }
+  .tippy-arrow {
+    color: rgba(84, 84, 84, 0.92);
+  }
+  .tippy-content {
+    padding: 8px 9px;
+  }
 }
