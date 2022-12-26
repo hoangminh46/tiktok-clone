@@ -18,6 +18,8 @@
   flex: 1;
 }
 .name {
+  text-decoration: none;
+  color: var(--black);
   font-size: 1.6rem;
   font-weight: 500;
 }

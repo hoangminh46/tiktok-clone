@@ -1,4 +1,5 @@
 .wrapper {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -74,7 +75,8 @@
   margin-right: 4px;
 }
 .right-icon {
-  margin-left: 4px;
+  position: absolute;
+  right: 40px;
 }
 
 .left-icon,

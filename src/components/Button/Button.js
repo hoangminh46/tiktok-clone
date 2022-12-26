@@ -1,6 +1,7 @@
 import styles from './Button.module.scss';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames/bind';
+import { useState, useEffect } from 'react';
 
 const cx = classNames.bind(styles);
 
@@ -31,6 +32,8 @@ function Button({ to, href, type, size, disabled, children, className, leftIcon,
     disabled,
     [size]: size,
   });
+
+
   return (
     <Comp className={classes} {...props}>
       {leftIcon && <span className={cx('left-icon')}>{leftIcon}</span>}
