@@ -1,16 +1,18 @@
 import classNames from 'classnames/bind';
 import styles from './Search.module.scss';
-
 import HeadLessTippy from '@tippyjs/react/headless';
 import 'tippy.js/dist/tippy.css'; // optional
-
+import axios, { isCancel, AxiosError } from 'axios';
 import { faCircleXmark, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import * as searchService from '../../../../apiServices/searchService';
 import AccountItem from '../../../AccountItem/AccountItem';
 import { SearchIcon } from '../../../Icons/Icons';
 import { Wrapper as PopperWrapper } from '../../../Popper/Popper';
 import { useEffect, useState } from 'react';
 import { useRef } from 'react';
+import { useDebounce } from '../../../../hooks';
 
 const cx = classNames.bind(styles);
 
@@ -24,6 +26,8 @@ function Search() {
   // Xử lý icon loading khi tìm kiếm
   const [loading, setLoading] = useState(false);
 
+  const debounced = useDebounce(searchValue, 500);
+
   const inputRef = useRef();
 
   const handleHideResults = () => {
@@ -33,25 +37,19 @@ function Search() {
   // Lấy dữ liệu tìm kiếm API
   useEffect(() => {
     // kiểm tra nếu ng dùng nhập vào mới get API
-    if (!searchValue.trim()) {
+    if (!debounced.trim()) {
       setSearchResult([]);
       return;
     }
     // Trước khi get API sẽ set loading cho icon
-    setLoading(true);
-    // Lấy API
-    fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(searchValue)}&type=less`)
-      .then((res) => res.json())
-      .then((res) => {
-        // Đặt dữ liệu vừa tìm được (là mảng) vào searchResult để render dữ liệu
-        setSearchResult(res.data);
-        // Sau khi get API xong sẽ set icon loading là false => dừng load
-        setLoading(false);
-      })
-      .catch(() => {
-        setLoading(false);
-      });
-  }, [searchValue]);
+    const fetchApi = async () => {
+      setLoading(true);
+      const result = await searchService.search(debounced);
+      setSearchResult(result);
+      setLoading(false);
+    };
+    fetchApi();
+  }, [debounced]);
 
   return (
     <HeadLessTippy
